@@ -23,6 +23,9 @@ const App=StackNavigator({
     Main:{screen:Main},
     TabNav:{screen:TabNav},
     Detail:{screen:Detail},
+},{
+    mode:'card',
+    headerMode:'screen'
 });
 
 
