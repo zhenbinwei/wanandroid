@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 
 
-const homeApi = 'http://www.wanandroid.com/article/list/0/json';
+const dataApi = 'http://www.wanandroid.com/article/list/0/json';
 
 
 export default class Home extends Component<Props> {
@@ -33,7 +33,7 @@ export default class Home extends Component<Props> {
     }
 
     get() {
-        fetch(homeApi, {
+        fetch(dataApi, {
             method: 'GET',
         }).then((response) => {
             return response.json()
@@ -85,7 +85,7 @@ export default class Home extends Component<Props> {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{flex: 1,backgroundColor:'#fff'}}>
                 <FlatList
                     data={this.state.data}
                     keyExtractor={
