@@ -13,7 +13,11 @@ import {
 } from 'react-native';
 export default class Me extends Component<Props> {
     static navigationOptions={
-        header:null
+        headerStyle:{
+            height:45
+        },
+        headerLeft:null,
+        headerTitle:'我的'
     };
     render() {
         return (

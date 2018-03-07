@@ -12,7 +12,11 @@ import {
 } from 'react-native';
 export default class Category extends Component<Props> {
     static navigationOptions={
-        header:null
+        headerStyle:{
+            height:45
+        },
+        headerLeft:null,
+        headerTitle:'分类'
     };
     render() {
         return (

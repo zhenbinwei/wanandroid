@@ -7,9 +7,9 @@
  */
 import React, { Component } from 'react';
 import {
-    Button, FlatList,
-
-    Text,
+    Button, FlatList, StatusBar,
+    StyleSheet,
+    Text, TouchableOpacity,
     View
 } from 'react-native';
 
@@ -21,8 +21,12 @@ export default class Home extends Component<Props> {
 
 
     static navigationOptions={
-        header:null
-    }
+        headerStyle:{
+            height:45
+        },
+        headerLeft:null,
+        headerTitle:'首页'
+    };
 
     componentDidMount() {
         this.get();
@@ -52,24 +56,55 @@ export default class Home extends Component<Props> {
         }
     }
     _renderItem = ({item}) => (
-        <Text
-            style={{height:40}}
-        >
-            {item.title}
-        </Text>
-    );
-    _keyExtractor = (item, index) => index;
 
+        <TouchableOpacity  style={styles.item}>
+            <Text
+                style={styles.itemTitle}
+            >
+                {item.title}
+            </Text>
+            <Text style={{fontSize:14,marginTop:4}}>
+                {'作者:'}<Text style={{color:'blue'}}>{item.author}</Text>
+            </Text>
+        </TouchableOpacity >
+
+    );
     render() {
         return (
             <View style={{flex:1}}>
                <FlatList
-                   data={this.state.data}
-               keyExtractor={this._keyExtractor()}
-
+               data={this.state.data}
+               keyExtractor={
+                   (item)=>{
+                       return item.id
+                   }
+               }
+               ItemSeparatorComponent={ItemDivideComponent}
                renderItem={this._renderItem}
                />
             </View>
         );
     }
+
+
 }
+
+//分隔线
+class ItemDivideComponent extends Component {
+    render() {
+        return (
+            <View style={{height: 1, backgroundColor: '#dcdcdc',marginLeft:8,marginRight:8}}/>
+        );
+    }
+};
+
+let styles = StyleSheet.create({
+    itemTitle: {
+        fontSize:20,
+        color:'#222',
+        fontFamily: 'Cochin',
+    },
+    item: {
+        margin:8
+    },
+});
