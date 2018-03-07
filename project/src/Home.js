@@ -38,7 +38,6 @@ export default class Home extends Component<Props> {
         }).then((response) => {
             return response.json()
         }).then((responsJson) => {
-            console.log(responsJson.data.datas)
             this.setState({
                 data: responsJson.data.datas
             })
