@@ -5,6 +5,8 @@ import Detail from "./project/src/Detail";
 import Me from "./project/src/Me";
 import Home from "./project/src/Home";
 import Category from "./project/src/Category";
+import Colors from "./project/src/Colors";
+import Login from "./project/src/Login";
 
 
 const TabNav=TabNavigator({
@@ -15,14 +17,19 @@ const TabNav=TabNavigator({
     tabBarOptions:{
         indicatorStyle:{
             height:0
-        }
+        },
+        style: {
+            backgroundColor: Colors.zColor1,
+        },
     },
+
     tabBarPosition:'bottom'
 });
 const App=StackNavigator({
     Main:{screen:Main},
     TabNav:{screen:TabNav},
     Detail:{screen:Detail},
+    Login:{screen:Login}
 },{
     mode:'card',
     headerMode:'screen'

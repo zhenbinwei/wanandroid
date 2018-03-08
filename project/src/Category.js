@@ -12,6 +12,7 @@ import {
     View,
     StyleSheet
 } from 'react-native';
+import Colors from "./Colors";
 
 
 let dataApi='http://www.wanandroid.com/tree/json';
@@ -81,7 +82,7 @@ console.log(responsJson.data)
 
     render() {
         return (
-            <View style={{flex: 1,backgroundColor:'#fff'}}>
+            <View style={{flex: 1,backgroundColor:Colors.zColor2}}>
                 <FlatList
                     data={this.state.data}
                     keyExtractor={
@@ -100,14 +101,14 @@ console.log(responsJson.data)
 class ItemDivideComponent extends Component {
     render() {
         return (
-            <View style={{height: 1, backgroundColor: '#dcdcdc', marginLeft: 8, marginRight: 8}}/>
+            <View style={{height: 1, backgroundColor: Colors.fColor1, marginLeft: 8, marginRight: 8}}/>
         );
     }
 };
 let styles = StyleSheet.create({
     itemTitle: {
         fontSize: 20,
-        color: '#222',
+        color: Colors.fontColor1,
         fontFamily: 'Cochin',
     },
     item: {
@@ -122,6 +123,7 @@ let styles = StyleSheet.create({
     },
     labelItem:{
         fontSize:16,
-        margin:4
+        margin:4,
+        color:Colors.fontColor3
     }
 });

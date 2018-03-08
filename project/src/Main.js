@@ -17,7 +17,7 @@ export default class Main extends Component<{}> {
     render() {
         return (
             <View
-                style={{flex:1}}
+                style={{flex:1,alignItems:'center',justifyContent:'center'}}
             >
                 <Button
                     title='跳转主页'

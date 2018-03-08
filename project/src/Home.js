@@ -12,6 +12,7 @@ import {
     Text, TouchableOpacity,
     View
 } from 'react-native';
+import Colors from "./Colors";
 
 
 const dataApi = 'http://www.wanandroid.com/article/list/0/json';
@@ -62,7 +63,7 @@ export default class Home extends Component<Props> {
                 style={{fontSize: 16,marginTop:4,marginBottom:4}}
                   numberOfLines={1}
             >
-                {'分类:'} <Text style={{color: 'blue'}}>{item.chapterName}</Text>
+                {'分类:'} <Text style={{color: Colors.zColor1}}>{item.chapterName}</Text>
 
             </Text>
             <Text
@@ -74,7 +75,7 @@ export default class Home extends Component<Props> {
             <View style={{justifyContent:'space-between', flexDirection: 'row', marginTop: 4}}>
                 <Text style={{fontSize: 14}}
                       numberOfLines={1}>
-                    {'作者:'}<Text style={{color: 'blue'}}>{item.author}</Text>
+                    {'作者:'}<Text style={{color: Colors.zColor1}}>{item.author}</Text>
                 </Text>
                 <Text
                       numberOfLines={1}>{item.niceDate}</Text>
@@ -85,7 +86,7 @@ export default class Home extends Component<Props> {
 
     render() {
         return (
-            <View style={{flex: 1,backgroundColor:'#fff'}}>
+            <View style={{flex: 1,backgroundColor:Colors.zColor2}}>
                 <FlatList
                     data={this.state.data}
                     keyExtractor={
@@ -107,7 +108,7 @@ export default class Home extends Component<Props> {
 class ItemDivideComponent extends Component {
     render() {
         return (
-            <View style={{height: 1, backgroundColor: '#dcdcdc', marginLeft: 8, marginRight: 8}}/>
+            <View style={{height: 1, backgroundColor: Colors.fColor1, marginLeft: 8, marginRight: 8}}/>
         );
     }
 };
@@ -115,8 +116,7 @@ class ItemDivideComponent extends Component {
 let styles = StyleSheet.create({
     itemTitle: {
         fontSize: 20,
-        color: '#222',
-        fontFamily: 'Cochin',
+        color:Colors.fontColor1,
     },
     item: {
         margin: 8
