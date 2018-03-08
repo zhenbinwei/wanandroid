@@ -7,6 +7,7 @@ import Home from "./project/src/Home";
 import Category from "./project/src/Category";
 import Colors from "./project/src/Colors";
 import Login from "./project/src/Login";
+import SignUp from "./project/src/SignUp";
 
 
 const TabNav=TabNavigator({
@@ -29,7 +30,8 @@ const App=StackNavigator({
     Main:{screen:Main},
     TabNav:{screen:TabNav},
     Detail:{screen:Detail},
-    Login:{screen:Login}
+    Login:{screen:Login},
+    SignUp:{screen:SignUp}
 },{
     mode:'card',
     headerMode:'screen'

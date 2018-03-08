@@ -26,7 +26,7 @@ export default class Me extends Component<Props> {
         return (
             <View style={{flex: 1,justifyContent:'center',alignItems:'center'}}>
                 <TouchableOpacity
-                    style={{width: 100,height:45,backgroundColor:Colors.zColor1,alignItems:'center',justifyContent:'center',borderRadius:4}}
+                    style={{width: 100,height:44,backgroundColor:Colors.zColor1,alignItems:'center',justifyContent:'center',borderRadius:4}}
                     onPress={
                         () => {
                             this.props.navigation.navigate('Login')
