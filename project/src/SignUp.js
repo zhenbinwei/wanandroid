@@ -25,7 +25,7 @@ export default class Login extends Component<Props> {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{flex: 1,backgroundColor:Colors.zColor2}}>
                 <View style={{flexDirection:'row',alignSelf:'center',marginTop:100}}>
                     <Text style={styles.text}>{'用户名'}</Text>
                     <TextInput

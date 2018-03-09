@@ -1,5 +1,6 @@
 import { AppRegistry } from 'react-native';
 import {StackNavigator, TabNavigator} from "react-navigation";
+import "./project/src/tools/Storage"
 import Main from "./project/src/Main";
 import Detail from "./project/src/Detail";
 import Me from "./project/src/Me";
@@ -22,16 +23,19 @@ const TabNav=TabNavigator({
         style: {
             backgroundColor: Colors.zColor1,
         },
+        labelStyle: {
+            fontSize: 16,
+        }
     },
-
+    backBehavior:'none',
     tabBarPosition:'bottom'
 });
 const App=StackNavigator({
     Main:{screen:Main},
     TabNav:{screen:TabNav},
     Detail:{screen:Detail},
-    Login:{screen:Login},
-    SignUp:{screen:SignUp}
+    SignUp:{screen:SignUp},
+    Login:{screen:Login}
 },{
     mode:'card',
     headerMode:'screen'

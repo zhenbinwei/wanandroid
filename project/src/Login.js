@@ -1,6 +1,6 @@
 import {Component} from "react";
 import Colors from "./Colors";
-import {Text, View, StyleSheet, TextInput, TouchableOpacity,Platform,ToastAndroid} from "react-native";
+import {Text, View, StyleSheet, TextInput, TouchableOpacity, Platform, ToastAndroid, StatusBar} from "react-native";
 import React from "react";
 
 /**
@@ -15,7 +15,7 @@ let loginApi='http://www.wanandroid.com/user/login';
 export default class Login extends Component<Props> {
     static navigationOptions = {
         headerStyle: {
-            height: 45
+            height: 45,
         },
         headerTitle: '登陆'
     };
@@ -39,6 +39,11 @@ export default class Login extends Component<Props> {
                if(Platform.OS==='android') {
                    ToastAndroid.show('登录成功', ToastAndroid.SHORT);
                }
+               storage.save({
+                   key:'UserInfoKey',
+                   data:responsJson.data
+               });
+               this.props.navigation.pop(1)
            }else {
                if(Platform.OS==='android') {
                    ToastAndroid.show(responsJson.errorMsg, ToastAndroid.SHORT);
@@ -54,7 +59,7 @@ export default class Login extends Component<Props> {
         let userName='';
         let pwd='';
         return (
-            <View style={{flex: 1}}>
+            <View style={{flex: 1,backgroundColor:Colors.zColor2}}>
                 <View style={{flexDirection:'row',alignSelf:'center',marginTop:100}}>
                     <Text style={styles.text}>{'用户名'}</Text>
                     <TextInput
@@ -102,6 +107,7 @@ export default class Login extends Component<Props> {
                                   onPress={
                                       () => {
                                           this.props.navigation.navigate('SignUp')
+                                         // this.props.navigation.pop(2)
                                       }
                                   }>
                     <Text style={{fontSize:20,color:Colors.fontColor0}}>

@@ -26,7 +26,8 @@ export default class Home extends Component<Props> {
             height: 45
         },
         headerLeft: null,
-        headerTitle: '首页'
+        headerTitle: '首页',
+        tabBarLabel:'首页'
     };
 
     componentDidMount() {

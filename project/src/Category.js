@@ -23,7 +23,8 @@ export default class Category extends Component<Props> {
             height:45
         },
         headerLeft:null,
-        headerTitle:'分类'
+        headerTitle:'体系',
+        tabBarLabel:'体系'
     };
 
     constructor(props){
@@ -46,8 +47,6 @@ export default class Category extends Component<Props> {
              this.setState({
                  data: responsJson.data
              })
-console.log(responsJson.data)
-
         }).catch((err) => {//2
             console.error(err);
         });
