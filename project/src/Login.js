@@ -43,6 +43,7 @@ export default class Login extends Component<Props> {
                    key:'UserInfoKey',
                    data:responsJson.data
                });
+               this.props.navigation.state.params.callback();
                this.props.navigation.pop(1)
            }else {
                if(Platform.OS==='android') {

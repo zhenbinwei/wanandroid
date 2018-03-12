@@ -22,7 +22,7 @@ export default class Main extends Component<{}> {
                 <Button
                     title='跳转主页'
                     onPress={
-                        ()=>{this.props.navigation.navigate('TabNav',{text:'测试'})}}
+                        ()=>{this.props.navigation.navigate('TabNav')}}
                 />
             </View>
         );

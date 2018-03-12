@@ -37,6 +37,7 @@ export default class Me extends Component<Props> {
     }
 
     render() {
+
         if(!this.state.loginState){
         return (
             <View style={{flex: 1,justifyContent:'center',alignItems:'center',backgroundColor:Colors.zColor2}}>
@@ -44,7 +45,12 @@ export default class Me extends Component<Props> {
                     style={{width: 100,height:44,backgroundColor:Colors.zColor1,alignItems:'center',justifyContent:'center',borderRadius:4}}
                     onPress={
                         () => {
-                            this.props.navigation.navigate('Login')
+                            this.props.navigation.navigate('Login',{
+                                ...this.props.navigation.state.params,
+                                callback:()=>{
+                                    this.getUserInfo();
+                                }
+                            })
                         }
                     }>
                     <Text style={{color:Colors.fontColor4,fontSize:16}}>
@@ -60,7 +66,7 @@ export default class Me extends Component<Props> {
                         <View
                             style={{height:80,width:80,backgroundColor:Colors.zColor2}}
                         />
-                        <Text style={{fontSize:16,marginTop:8}}>{'用户名'}</Text>
+                        <Text style={{fontSize:16,marginTop:8}}>{this.state.userInfo.username}</Text>
                     </View>
                     <TouchableOpacity style={{height:44, backgroundColor:Colors.zColor2,justifyContent:'flex-start',
                         flexDirection:'row',
@@ -96,6 +102,7 @@ export default class Me extends Component<Props> {
         storage.load({
             key: 'UserInfoKey',
         }).then(ret => {
+            console.log('数据'+ret)
             if(ret.username){
                 this.setState({
                     loginState:true,

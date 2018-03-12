@@ -26,7 +26,6 @@ export default class Detail extends Component<Props> {
     }
 
     render() {
-        console.log('text:'+this.props.navigation.state.params.text);
         return (
             <View style={{flex:1}}>
                 <CommonWebView
