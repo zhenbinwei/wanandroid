@@ -7,16 +7,16 @@
  */
 import React, {Component} from 'react';
 import {
-    Button, FlatList, StatusBar,
+    Button, FlatList, Image, StatusBar,
     StyleSheet,
     Text, TouchableOpacity,
-    View
+    View, ViewPagerAndroid
 } from 'react-native';
 import Colors from "./Colors";
 
 
 const dataApi = 'http://www.wanandroid.com/article/list/0/json';
-
+const bannerApi='http://www.wanandroid.com/banner/json';
 
 export default class Home extends Component<Props> {
 
@@ -106,6 +106,7 @@ export default class Home extends Component<Props> {
                     }
                     ItemSeparatorComponent={ItemDivideComponent}
                     renderItem={this._renderItem}
+                    ListHeaderComponent={HeaderComponent}
                 />
             </View>
         );
@@ -116,12 +117,81 @@ export default class Home extends Component<Props> {
 
 //分隔线
 class ItemDivideComponent extends Component {
+
+
     render() {
         return (
             <View style={{height: 1, backgroundColor: Colors.fColor1, marginLeft: 8, marginRight: 8}}/>
         );
     }
 };
+
+//头部
+class HeaderComponent extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            data: []
+        }
+    }
+    componentDidMount() {
+       this.getBanner();
+    }
+    render(){
+        return(
+            <ViewPagerAndroid
+                style={{backgroundColor:'red',height:120}}
+                initialPage={0}>
+                <View style={{
+                    alignItems: 'center',
+                    padding: 20,
+                }}>
+                    <Text>First page</Text>
+                </View>
+                <View style={{
+                    alignItems: 'center',
+                    padding: 20,
+                }}>
+                    <Text>Second page</Text>
+                </View>
+            </ViewPagerAndroid>
+        );
+    }
+    getPages(data){
+        let pages =[];
+        for (let i = 0; i < data.length; i++) {
+            pages.push(
+                <TouchableOpacity style={{flex:1}}  key={i}>
+                    <Image
+                        style={{flex:1}}
+                        source={{uri: data[i].imagePath}}
+                    />
+
+                </TouchableOpacity>
+            );
+        }
+
+        return(
+            <View style={{flex:1, backgroundColor:'#ff3'}}>
+                {pages}
+            </View>
+        );
+    }
+
+    getBanner(){
+        fetch(bannerApi, {
+            method: 'GET',
+        }).then((response) => {
+            return response.json()
+        }).then((responsJson) => {
+            this.setState({
+                data: responsJson.data
+            })
+        }).catch((err) => {//2
+            console.error(err);
+        });
+    }
+}
 
 let styles = StyleSheet.create({
     itemTitle: {
