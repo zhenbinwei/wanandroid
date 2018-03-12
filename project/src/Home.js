@@ -63,7 +63,10 @@ export default class Home extends Component<Props> {
 
         <TouchableOpacity style={styles.item} onPress={
             ()=>{
-                this.props.navigation.navigate('Detail',{url:item.link})
+                this.props.navigation.navigate('Detail',{
+                    ...this.props.navigation.state.params,
+                    url:item.link,title:item.title
+                })
             }
         }>
             <Text
