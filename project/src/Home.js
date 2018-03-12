@@ -42,7 +42,9 @@ export default class Home extends Component<Props> {
         }).then((responsJson) => {
             this.setState({
                 data: responsJson.data.datas
+
             })
+            console.log(this.state.data)
         }).catch((err) => {//2
             console.error(err);
         });
@@ -59,7 +61,11 @@ export default class Home extends Component<Props> {
 
     _renderItem = ({item}) => (
 
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={
+            ()=>{
+                this.props.navigation.navigate('Detail',{url:item.link})
+            }
+        }>
             <Text
                 style={{fontSize: 16,marginTop:4,marginBottom:4}}
                   numberOfLines={1}

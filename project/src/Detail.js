@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import {
     Text,
-    View
+    View, WebView
 } from 'react-native';
 export default class Detail extends Component<Props> {
 
@@ -16,12 +16,31 @@ export default class Detail extends Component<Props> {
         headerStyle:{
             height:45
         }
+    };
+    constructor(props){
+        super(props)
+        this.state={
+            url:this.props.navigation.state.params.url,
+        }
     }
 
     render() {
+
+        console.log(this.state.url)
         return (
             <View style={{flex:1}}>
-                <Text>detail</Text>
+                <WebView
+                    style={{flex:1}}
+                    automaticallyAdjustContentInsets={false}
+
+                    source={{uri: this.state.url}}
+                    javaScriptEnabled={true}
+                    domStorageEnabled={true}
+                    decelerationRate="normal"
+                    scalesPageToFit={true}
+                    startInLoadingState={true}
+
+                />
             </View>
         );
     }
