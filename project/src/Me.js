@@ -58,6 +58,7 @@ export default class Me extends Component<Props> {
                     </Text>
                 </TouchableOpacity>
             </View>
+
         );}else {
             return(
                 <View style={{flex: 1,backgroundColor:Colors.zColor2}}>

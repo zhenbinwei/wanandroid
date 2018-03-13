@@ -10,14 +10,16 @@ import {
     Button, FlatList, Image, StatusBar,
     StyleSheet,
     Text, TouchableOpacity,
-    View, ViewPagerAndroid
+    View, ViewPagerAndroid,Dimensions
 } from 'react-native';
 import Colors from "./Colors";
+import ItemDivideComponent from "./views/ItemDivideComponent";
+import BannerComponent from "./views/BannerComponent";
 
 
-const dataApi = 'http://www.wanandroid.com/article/list/0/json';
-const bannerApi='http://www.wanandroid.com/banner/json';
-
+let page=0;
+const itemDivide=()=>(<ItemDivideComponent/>)
+let newData=[];
 export default class Home extends Component<Props> {
 
 
@@ -35,27 +37,37 @@ export default class Home extends Component<Props> {
     }
 
     get() {
-        fetch(dataApi, {
+        fetch(this.getApi(), {
             method: 'GET',
         }).then((response) => {
             return response.json()
         }).then((responsJson) => {
-            this.setState({
-                data: responsJson.data.datas
-
-            })
-            console.log(this.state.data)
+            if(page===0){
+                this.setState({
+                    data: responsJson.data.datas,
+                    refreshing:false
+                });
+            }else {
+                this.state.data.push(...responsJson.data.datas);
+                this.setState({
+                    refreshing:false
+                });
+            }
         }).catch((err) => {//2
             console.error(err);
         });
     }
 
+    getApi(){
+        return 'http://www.wanandroid.com/article/list/'+page+'/json'
+    }
 
     constructor(props) {
         super(props);
 
         this.state = {
-            data: []
+            data: [],
+            refreshing:true
         }
     }
 
@@ -95,18 +107,40 @@ export default class Home extends Component<Props> {
     );
 
     render() {
+
+        console.log('数组长度'+this.state.data.length)
         return (
             <View style={{flex: 1,backgroundColor:Colors.zColor2}}>
                 <FlatList
+                    /*getItemLayout={(data, index) => ( {length: 63, offset: 63 * index, index} )}*/
                     data={this.state.data}
                     keyExtractor={
                         (item) => {
                             return item.id
                         }
                     }
-                    ItemSeparatorComponent={ItemDivideComponent}
+                    ItemSeparatorComponent={itemDivide}
                     renderItem={this._renderItem}
-                    ListHeaderComponent={HeaderComponent}
+                    ListHeaderComponent={<BannerComponent/>}
+                    onRefresh={
+                        ()=>{
+                           this.setState({
+                               refreshing:true
+                           });
+                           page=0;
+                           this.get()
+                        }
+                    }
+                    refreshing={this.state.refreshing}
+                    onEndReached={
+                        (info)=>{
+                            if(info.distanceFromEnd>0){
+                                page++;
+                                this.get()
+                            }
+                        }
+                    }
+                    onEndReachedThreshold={0.1}
                 />
             </View>
         );
@@ -115,83 +149,6 @@ export default class Home extends Component<Props> {
 
 }
 
-//分隔线
-class ItemDivideComponent extends Component {
-
-
-    render() {
-        return (
-            <View style={{height: 1, backgroundColor: Colors.fColor1, marginLeft: 8, marginRight: 8}}/>
-        );
-    }
-};
-
-//头部
-class HeaderComponent extends Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            data: []
-        }
-    }
-    componentDidMount() {
-       this.getBanner();
-    }
-    render(){
-        return(
-            <ViewPagerAndroid
-                style={{backgroundColor:'red',height:120}}
-                initialPage={0}>
-                <View style={{
-                    alignItems: 'center',
-                    padding: 20,
-                }}>
-                    <Text>First page</Text>
-                </View>
-                <View style={{
-                    alignItems: 'center',
-                    padding: 20,
-                }}>
-                    <Text>Second page</Text>
-                </View>
-            </ViewPagerAndroid>
-        );
-    }
-    getPages(data){
-        let pages =[];
-        for (let i = 0; i < data.length; i++) {
-            pages.push(
-                <TouchableOpacity style={{flex:1}}  key={i}>
-                    <Image
-                        style={{flex:1}}
-                        source={{uri: data[i].imagePath}}
-                    />
-
-                </TouchableOpacity>
-            );
-        }
-
-        return(
-            <View style={{flex:1, backgroundColor:'#ff3'}}>
-                {pages}
-            </View>
-        );
-    }
-
-    getBanner(){
-        fetch(bannerApi, {
-            method: 'GET',
-        }).then((response) => {
-            return response.json()
-        }).then((responsJson) => {
-            this.setState({
-                data: responsJson.data
-            })
-        }).catch((err) => {//2
-            console.error(err);
-        });
-    }
-}
 
 let styles = StyleSheet.create({
     itemTitle: {

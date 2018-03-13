@@ -28,7 +28,8 @@ const TabNav=TabNavigator({
         }
     },
     backBehavior:'none',
-    tabBarPosition:'bottom'
+    tabBarPosition:'bottom',
+    swipeEnabled:false
 });
 const App=StackNavigator({
     Main:{screen:Main},
