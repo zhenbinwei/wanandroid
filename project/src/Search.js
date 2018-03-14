@@ -1,9 +1,10 @@
 
 
 import React, {Component} from 'react';
-import {FlatList, Image, Text, TextInput, TouchableOpacity, View,StyleSheet} from "react-native";
+import {FlatList, Image, Text, TextInput, TouchableOpacity, View,StyleSheet,Keyboard} from "react-native";
 import Colors from "./Colors";
 import ItemDivideComponent from "./views/ItemDivideComponent";
+import TitleBar from "./views/TitleBar";
 
 
 let key='';
@@ -11,36 +12,7 @@ let page=0;
 const itemDivide=()=>(<ItemDivideComponent/>)
 export default class Search extends Component<Props> {
 
-    static navigationOptions = ({ navigation }) => ({
-        headerStyle: {
-            height: 45
-        },
-        headerTitle:( <TextInput
-            style={{ flex:1}}
-            underlineColorAndroid={Colors.zColor1}
-            placeholder={'输入关键字 空格隔开...'}
-            returnKeyType={'search'}
-            onChangeText={(text)=>{
-                page=0;
-            key=text;
-            }
-            }
-        />),
-        headerRight:(<TouchableOpacity style={{marginRight:15}} onPress={()=>{
-            navigation.state.params.searchFun(key)
-        }}>
-            <Image
-                style={{width:25,height:25}}
-                source={require('../res/search.png')}
-            />
-        </TouchableOpacity>)
-    });
 
-
-    componentDidMount() {
-        this.props.navigation.setParams({searchFun:this.searchFun})
-        this.props.navigation.setParams({getApi:this.getApi})
-    }
      constructor(props){
          super(props);
          this.state = {
@@ -51,7 +23,7 @@ export default class Search extends Component<Props> {
      searchFun(keyWords) {
         let formData = new FormData();
         formData.append("k",keyWords);
-        fetch('http://www.wanandroid.com/article/query/'+page+'/json', {
+        fetch(this.getApi(), {
                 method: 'POST',
                 headers: {},
                 body: formData
@@ -113,8 +85,42 @@ export default class Search extends Component<Props> {
 
     );
     render(){
-        console.log('数据2'+this.state.data.length)
-        return( <View style={{flex: 1,backgroundColor:Colors.zColor1}}>
+        return( <View style={{flex: 1,backgroundColor:Colors.zColor2}}>
+            <TitleBar
+                {...this.props}
+                 centerView={<TextInput
+                 style={{ flex:1}}
+                 underlineColorAndroid={Colors.zColor1}
+                 placeholder={'输入关键字 空格隔开...'}
+                 returnKeyType={'search'}
+                 onChangeText={(text)=>{
+                     page=0;
+                     key=text;
+                 }
+                 }
+                 onSubmitEditing={
+                     ()=>{
+                         Keyboard.dismiss();
+                         this.setState({
+                             refreshing:true
+                         });
+                         this.searchFun(key)
+                     }
+                     }
+             />}
+             rightView={<TouchableOpacity  onPress={()=>{
+                 Keyboard.dismiss();
+                 this.setState({
+                     refreshing:true
+                 });
+                 this.searchFun(key)
+             }}>
+                 <Image
+                     style={{width:25,height:25}}
+                     source={require('../res/search.png')}
+                 />
+             </TouchableOpacity>}
+            />
             <FlatList
                 /*getItemLayout={(data, index) => ( {length: 63, offset: 63 * index, index} )}*/
                 data={this.state.data}
@@ -131,7 +137,7 @@ export default class Search extends Component<Props> {
                             refreshing:true
                         });
                         page=0;
-                        this.get()
+                        this.searchFun(key)
                     }
                 }
                 refreshing={this.state.refreshing}
@@ -139,7 +145,7 @@ export default class Search extends Component<Props> {
                     (info)=>{
                         if(info.distanceFromEnd>0){
                             page++;
-                            this.get()
+                            this.searchFun(key)
                         }
                     }
                 }

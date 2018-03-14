@@ -9,36 +9,17 @@ import {
     Button, FlatList, Image, StatusBar,
     StyleSheet,
     Text, TouchableOpacity,
-    View, ViewPagerAndroid,Dimensions
+    View, ViewPagerAndroid,Dimensions,BackHandler
 } from 'react-native';
 import Colors from "./Colors";
 import ItemDivideComponent from "./views/ItemDivideComponent";
 import BannerComponent from "./views/BannerComponent";
+import TitleBar from "./views/TitleBar";
 
 
 let page=0;
 const itemDivide=()=>(<ItemDivideComponent/>)
 export default class Home extends Component<Props> {
-
-
-    static navigationOptions = ({ navigation }) => ({
-        headerStyle: {
-            height: 45
-        },
-        headerLeft: null,
-        headerTitle: '首页',
-        tabBarLabel:'首页',
-        headerRight:(<TouchableOpacity style={{marginRight:15}} onPress={
-            ()=>{
-                navigation.navigate('Search')
-            }
-        }>
-            <Image
-                style={{width:25,height:25}}
-                source={require('../res/search.png')}
-            />
-        </TouchableOpacity>)
-    });
 
     componentDidMount() {
         this.get();
@@ -118,6 +99,26 @@ export default class Home extends Component<Props> {
 
         return (
             <View style={{flex: 1,backgroundColor:Colors.zColor2}}>
+                <TitleBar
+                    {...this.props}
+                    centerText={'首页'}
+                    rightView={<TouchableOpacity  onPress={
+                        ()=>{
+                           this.props.navigation.navigate('Search')
+                        }
+                    }
+                    >
+                        <Image
+                            style={{width:25,height:25}}
+                            source={require('../res/search.png')}
+                        />
+                    </TouchableOpacity>}
+                    onLeftPress={
+                        ()=>{
+                            BackHandler.exitApp()
+                        }
+                    }
+                />
                 <FlatList
                     /*getItemLayout={(data, index) => ( {length: 63, offset: 63 * index, index} )}*/
                     data={this.state.data}

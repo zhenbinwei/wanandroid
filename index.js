@@ -10,12 +10,23 @@ import Colors from "./project/src/Colors";
 import Login from "./project/src/Login";
 import SignUp from "./project/src/SignUp";
 import Search from "./project/src/Search";
+import TitleBar from "./project/src/views/TitleBar";
 
 
 const TabNav=TabNavigator({
-    Home:{screen:Home},
-    Category:{screen:Category},
-    Me:{screen:Me}
+    Home:{screen:Home,
+        navigationOptions:{
+        tabBarLabel:'首页',
+    }
+    },
+    Category:{screen:Category,
+        navigationOptions:{
+        tabBarLabel:'体系',
+    }},
+    Me:{screen:Me,
+        navigationOptions:{
+        tabBarLabel:'我的',
+    }}
 },{
     tabBarOptions:{
         indicatorStyle:{
@@ -38,10 +49,12 @@ const App=StackNavigator({
     Detail:{screen:Detail},
     SignUp:{screen:SignUp},
     Login:{screen:Login},
-    Search:{screen:Search}
+    Search:{screen:Search},
+    TitleBar:{screen:TitleBar}
 },{
     mode:'card',
-    headerMode:'screen'
+    headerMode:'screen',
+    navigationOptions:{header:null}
 });
 
 

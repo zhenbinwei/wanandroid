@@ -10,23 +10,23 @@ import {
     View, WebView
 } from 'react-native';
 import CommonWebView from "./views/CommonWebView";
+import TitleBar from "./views/TitleBar";
 export default class Detail extends Component<Props> {
-    static navigationOptions = ({ navigation }) => ({
-        headerTitle: navigation.state.params.title,
-        headerStyle:{
-            height:45
-        },
-    });
     constructor(props){
         super(props)
         this.state={
             url:this.props.navigation.state.params.url,
+            title:this.props.navigation.state.params.title
         }
     }
 
     render() {
         return (
             <View style={{flex:1}}>
+                <TitleBar
+                    {...this.props}
+                    centerText={this.state.title}
+                />
                 <CommonWebView
                     style={{flex:1}}
                     automaticallyAdjustContentInsets={false}

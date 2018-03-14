@@ -8,9 +8,10 @@ import React, {Component} from 'react';
 import {
     Button, Image,
     Text, TouchableOpacity,
-    View
+    View,BackHandler
 } from 'react-native';
 import Colors from "./Colors";
+import TitleBar from "./views/TitleBar";
 
 let logoutApi='http://www.wanandroid.com/user/logout';
 export default class Me extends Component<Props> {
@@ -40,7 +41,18 @@ export default class Me extends Component<Props> {
 
         if(!this.state.loginState){
         return (
+            <View style={{flex: 1}}>
+                <TitleBar
+                    {...this.props}
+                    centerText={'我的'}
+                    onLeftPress={
+                        ()=>{
+                            BackHandler.exitApp()
+                        }
+                    }
+                />
             <View style={{flex: 1,justifyContent:'center',alignItems:'center',backgroundColor:Colors.zColor2}}>
+
                 <TouchableOpacity
                     style={{width: 100,height:44,backgroundColor:Colors.zColor1,alignItems:'center',justifyContent:'center',borderRadius:4}}
                     onPress={
@@ -58,9 +70,19 @@ export default class Me extends Component<Props> {
                     </Text>
                 </TouchableOpacity>
             </View>
-
+            </View>
         );}else {
             return(
+                <View style={{flex: 1}}>
+                    <TitleBar
+                        {...this.props}
+                        centerText={'我的'}
+                        onLeftPress={
+                            ()=>{
+                                BackHandler.exitApp()
+                            }
+                        }
+                    />
                 <View style={{flex: 1,backgroundColor:Colors.zColor2}}>
                     <View style={{height:150, backgroundColor:Colors.zColor1,justifyContent:'center',
                         alignItems:'center'}}>
@@ -94,6 +116,7 @@ export default class Me extends Component<Props> {
                             {'退出登录'}
                         </Text>
                     </TouchableOpacity>
+                </View>
                 </View>
             )
         }

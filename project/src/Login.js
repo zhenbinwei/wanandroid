@@ -2,6 +2,7 @@ import {Component} from "react";
 import Colors from "./Colors";
 import {Text, View, StyleSheet, TextInput, TouchableOpacity, Platform, ToastAndroid, StatusBar} from "react-native";
 import React from "react";
+import TitleBar from "./views/TitleBar";
 
 /**
  * @File         : Login.js
@@ -12,13 +13,6 @@ import React from "react";
 
 let loginApi='http://www.wanandroid.com/user/login';
 export default class Login extends Component<Props> {
-    static navigationOptions = {
-        headerStyle: {
-            height: 45,
-        },
-        headerTitle: '登陆'
-    };
-
     constructor(props){
         super(props);
     }
@@ -60,6 +54,10 @@ export default class Login extends Component<Props> {
         let pwd='';
         return (
             <View style={{flex: 1,backgroundColor:Colors.zColor2}}>
+                <TitleBar
+                    {...this.props}
+                centerText={'登陆'}
+                />
                 <View style={{flexDirection:'row',alignSelf:'center',marginTop:100}}>
                     <Text style={styles.text}>{'用户名'}</Text>
                     <TextInput
@@ -106,8 +104,7 @@ export default class Login extends Component<Props> {
                 <TouchableOpacity style={styles.signUp}
                                   onPress={
                                       () => {
-                                         // this.props.navigation.navigate('SignUp')
-                                          this.props.navigation.pop(1)
+                                          this.props.navigation.navigate('SignUp')
                                       }
                                   }>
                     <Text style={{fontSize:20,color:Colors.fontColor0}}>

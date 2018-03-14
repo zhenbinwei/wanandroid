@@ -2,6 +2,7 @@ import {Component} from "react";
 import Colors from "./Colors";
 import {Text, View, StyleSheet, TextInput, TouchableOpacity} from "react-native";
 import React from "react";
+import TitleBar from "./views/TitleBar";
 
 /**
  * @File         : Login.js
@@ -11,13 +12,6 @@ import React from "react";
  */
 
 export default class Login extends Component<Props> {
-    static navigationOptions = {
-        headerStyle: {
-            height: 45
-        },
-        headerTitle: '注册'
-    };
-
     constructor(props){
         super(props);
     }
@@ -25,6 +19,10 @@ export default class Login extends Component<Props> {
     render() {
         return (
             <View style={{flex: 1,backgroundColor:Colors.zColor2}}>
+                <TitleBar
+                    {...this.props}
+                 centerText={'注册'}
+                />
                 <View style={{flexDirection:'row',alignSelf:'center',marginTop:100}}>
                     <Text style={styles.text}>{'用户名'}</Text>
                     <TextInput

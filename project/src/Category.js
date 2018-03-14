@@ -9,33 +9,15 @@ import {
     FlatList,
     Text, TouchableOpacity,
     View,
-    StyleSheet, Image
+    StyleSheet, Image,BackHandler
 } from 'react-native';
 import Colors from "./Colors";
+import TitleBar from "./views/TitleBar";
 
 
 let dataApi='http://www.wanandroid.com/tree/json';
 
 export default class Category extends Component<Props> {
-    static navigationOptions=({ navigation }) => ({
-        headerStyle:{
-            height:45
-        },
-        headerLeft:null,
-        headerTitle:'体系',
-        tabBarLabel:'体系',
-        headerRight:(<TouchableOpacity style={{marginRight:15}} onPress={
-            ()=>{
-                navigation.navigate('Search')
-            }
-        }>
-            <Image
-                style={{width:25,height:25}}
-                source={require('../res/search.png')}
-            />
-        </TouchableOpacity>)
-    });
-
     constructor(props){
         super(props);
         this.state = {
@@ -91,6 +73,25 @@ export default class Category extends Component<Props> {
     render() {
         return (
             <View style={{flex: 1,backgroundColor:Colors.zColor2}}>
+                <TitleBar
+                    {...this.props}
+                    centerText={'体系'}
+                    rightView={<TouchableOpacity  onPress={
+                        ()=>{
+                            this.props.navigation.navigate('Search')
+                        }
+                    }>
+                        <Image
+                            style={{width:25,height:25}}
+                            source={require('../res/search.png')}
+                        />
+                    </TouchableOpacity>}
+                    onLeftPress={
+                        ()=>{
+                            BackHandler.exitApp()
+                        }
+                    }
+                />
                 <FlatList
                     data={this.state.data}
                     keyExtractor={
