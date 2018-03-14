@@ -14,7 +14,6 @@ export default class TitleBar extends Component<Props> {
 
     constructor(props) {
         super(props);
-        console.log('点击事件'+ this.props.onLeftPress)
         this.state = {
             leftText: this.props.leftText,
             leftView: this.props.leftView,
@@ -28,7 +27,6 @@ export default class TitleBar extends Component<Props> {
     }
 
     render() {
-        console.log('点击事件'+ this.state.onLeftPress)
         return (
             <View style={{
                width:width, height: 44, justifyContent:'center'

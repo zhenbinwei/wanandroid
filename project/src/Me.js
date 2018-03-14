@@ -15,16 +15,6 @@ import TitleBar from "./views/TitleBar";
 
 let logoutApi='http://www.wanandroid.com/user/logout';
 export default class Me extends Component<Props> {
-    static navigationOptions = {
-        headerStyle: {
-            height: 45
-        },
-        headerLeft: null,
-        headerTitle: '我的',
-        tabBarLabel:'我的',
-
-    };
-
     constructor(props){
         super(props);
         this.state={
