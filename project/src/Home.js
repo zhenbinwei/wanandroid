@@ -3,7 +3,6 @@
  *
  * @Author       : weizhenbin
  * @Time         : 2018/3/6 9:44
- * @Copyright    : 2017 (c) Shenzhen Lamabang Technology Co., Ltd.
  */
 import React, {Component} from 'react';
 import {
@@ -19,18 +18,27 @@ import BannerComponent from "./views/BannerComponent";
 
 let page=0;
 const itemDivide=()=>(<ItemDivideComponent/>)
-let newData=[];
 export default class Home extends Component<Props> {
 
 
-    static navigationOptions = {
+    static navigationOptions = ({ navigation }) => ({
         headerStyle: {
             height: 45
         },
         headerLeft: null,
         headerTitle: '首页',
-        tabBarLabel:'首页'
-    };
+        tabBarLabel:'首页',
+        headerRight:(<TouchableOpacity style={{marginRight:15}} onPress={
+            ()=>{
+                navigation.navigate('Search')
+            }
+        }>
+            <Image
+                style={{width:25,height:25}}
+                source={require('../res/search.png')}
+            />
+        </TouchableOpacity>)
+    });
 
     componentDidMount() {
         this.get();
@@ -108,7 +116,6 @@ export default class Home extends Component<Props> {
 
     render() {
 
-        console.log('数组长度'+this.state.data.length)
         return (
             <View style={{flex: 1,backgroundColor:Colors.zColor2}}>
                 <FlatList

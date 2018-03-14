@@ -7,7 +7,6 @@ import {Button, View} from "react-native";
  *
  * @Author       : weizhenbin
  * @Time         : 2018/3/6 15:21
- * @Copyright    : 2017 (c) Shenzhen Lamabang Technology Co., Ltd.
  */
 
 export default class Main extends Component<{}> {

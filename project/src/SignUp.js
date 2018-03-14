@@ -8,7 +8,6 @@ import React from "react";
  *
  * @Author       : weizhenbin
  * @Time         : 2018/3/8 11:17
- * @Copyright    : 2017 (c) Shenzhen Lamabang Technology Co., Ltd.
  */
 
 export default class Login extends Component<Props> {

@@ -3,14 +3,13 @@
  *
  * @Author       : weizhenbin
  * @Time         : 2018/3/6 9:44
- * @Copyright    : 2017 (c) Shenzhen Lamabang Technology Co., Ltd.
  */
 import React, { Component } from 'react';
 import {
     FlatList,
     Text, TouchableOpacity,
     View,
-    StyleSheet
+    StyleSheet, Image
 } from 'react-native';
 import Colors from "./Colors";
 
@@ -18,14 +17,24 @@ import Colors from "./Colors";
 let dataApi='http://www.wanandroid.com/tree/json';
 
 export default class Category extends Component<Props> {
-    static navigationOptions={
+    static navigationOptions=({ navigation }) => ({
         headerStyle:{
             height:45
         },
         headerLeft:null,
         headerTitle:'体系',
-        tabBarLabel:'体系'
-    };
+        tabBarLabel:'体系',
+        headerRight:(<TouchableOpacity style={{marginRight:15}} onPress={
+            ()=>{
+                navigation.navigate('Search')
+            }
+        }>
+            <Image
+                style={{width:25,height:25}}
+                source={require('../res/search.png')}
+            />
+        </TouchableOpacity>)
+    });
 
     constructor(props){
         super(props);

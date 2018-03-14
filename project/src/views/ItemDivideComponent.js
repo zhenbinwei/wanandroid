@@ -3,7 +3,6 @@
  *
  * @Author       : weizhenbin
  * @Time         : 2018/3/13 11:40
- * @Copyright    : 2017 (c) Shenzhen Lamabang Technology Co., Ltd.
  */
 
 

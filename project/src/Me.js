@@ -3,7 +3,6 @@
  *
  * @Author       : weizhenbin
  * @Time         : 2018/3/6 9:44
- * @Copyright    : 2017 (c) Shenzhen Lamabang Technology Co., Ltd.
  */
 import React, {Component} from 'react';
 import {
@@ -21,7 +20,8 @@ export default class Me extends Component<Props> {
         },
         headerLeft: null,
         headerTitle: '我的',
-        tabBarLabel:'我的'
+        tabBarLabel:'我的',
+
     };
 
     constructor(props){
@@ -45,7 +45,7 @@ export default class Me extends Component<Props> {
                     style={{width: 100,height:44,backgroundColor:Colors.zColor1,alignItems:'center',justifyContent:'center',borderRadius:4}}
                     onPress={
                         () => {
-                            this.props.navigation.navigate('Search',{
+                            this.props.navigation.navigate('Login',{
                                 ...this.props.navigation.state.params,
                                 callback:()=>{
                                     this.getUserInfo();

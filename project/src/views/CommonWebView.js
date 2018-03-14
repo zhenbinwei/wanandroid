@@ -3,7 +3,6 @@
  *
  * @Author       : weizhenbin
  * @Time         : 2018/3/12 11:21
- * @Copyright    : 2017 (c) Shenzhen Lamabang Technology Co., Ltd.
  */
 
 import React, { Component } from 'react';
