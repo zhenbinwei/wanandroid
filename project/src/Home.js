@@ -129,7 +129,7 @@ export default class Home extends Component<Props> {
                     }
                     ItemSeparatorComponent={itemDivide}
                     renderItem={this._renderItem}
-                    ListHeaderComponent={<BannerComponent/>}
+                    ListHeaderComponent={<BannerComponent {...this.props}/>}
                     onRefresh={
                         ()=>{
                            this.setState({

@@ -6,7 +6,7 @@
  */
 
 import React, {Component} from 'react';
-import {Image, View} from "react-native";
+import {Image, TouchableOpacity, View} from "react-native";
 import Swiper from 'react-native-swiper';
 import Colors from "../Colors";
 const bannerApi='http://www.wanandroid.com/banner/json';
@@ -37,10 +37,23 @@ export default class BannerComponent extends Component{
         for (let i = 0; i < data.length; i++) {
             pages.push(
                 <View style={{flex:1}}  key={i} >
+                    <TouchableOpacity style={{flex:1}} activeOpacity={1}
+                                      onPress={
+                                          ()=>{
+                                              console.log('点击');
+                                              if(this.props.navigation){
+                                                  this.props.navigation.navigate('Detail',{
+                                                      ...this.props.navigation.state.params,
+                                                      url:data[i].url,title:data[i].title
+                                                  })
+                                              }
+                                          }
+                                      }>
                     <Image
                         style={{flex:1}}
                         source={{uri: data[i].imagePath}}
                     />
+                    </TouchableOpacity>
                 </View>
             );
         }

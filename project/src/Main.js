@@ -14,7 +14,7 @@ export default class Main extends Component<{}> {
     render() {
         return (
             <View
-                style={{flex:1,alignItems:'center',justifyContent:'center'}}
+                style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:Colors.zColor2}}
             >
                 <View  style={{height:80,width:80,backgroundColor:Colors.zColor1,borderRadius:360,justifyContent:'center',alignItems:'center'}}>
                 <Image
