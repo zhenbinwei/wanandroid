@@ -1,7 +1,7 @@
 import {Component} from "react";
 import React from "react";
-import {Button, View} from "react-native";
-import TitleBar from "./views/TitleBar";
+import {Button, Image, View} from "react-native";
+import Colors from "./Colors";
 
 /**
  * @File         : Main.js
@@ -11,26 +11,25 @@ import TitleBar from "./views/TitleBar";
  */
 
 export default class Main extends Component<{}> {
-    static navigationOptions={
-        header:null
-    }
     render() {
         return (
             <View
                 style={{flex:1,alignItems:'center',justifyContent:'center'}}
             >
-                <TitleBar
-                    centerText={'标题'}
-                    rightText={'取消'}
+                <View  style={{height:80,width:80,backgroundColor:Colors.zColor1,borderRadius:360,justifyContent:'center',alignItems:'center'}}>
+                <Image
+                    style={{height:60,width:60}}
+                    source={require('../res/logo.png')}
+                    resizeMode={'contain'}
                 />
-                <Button
-                    title='跳转主页'
-                    onPress={
-                        ()=>{
-                            this.props.navigation.replace('TabNav')
-                        }}
-                />
+                </View>
             </View>
         );
+    }
+
+    componentDidMount() {
+        setTimeout(()=>{
+            this.props.navigation.replace('TabNav')
+        },2000)
     }
 }

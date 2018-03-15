@@ -21,7 +21,8 @@ export default class Category extends Component<Props> {
     constructor(props){
         super(props);
         this.state = {
-            data: []
+            data: [],
+            refreshing:true
         }
     }
     componentDidMount() {
@@ -36,7 +37,8 @@ export default class Category extends Component<Props> {
             return response.json()
         }).then((responsJson) => {
              this.setState({
-                 data: responsJson.data
+                 data: responsJson.data,
+                 refreshing:false
              })
         }).catch((err) => {//2
             console.error(err);
@@ -99,8 +101,17 @@ export default class Category extends Component<Props> {
                             return item.id
                         }
                     }
+                    refreshing={this.state.refreshing}
                     ItemSeparatorComponent={ItemDivideComponent}
                     renderItem={this._renderItem}
+                    onRefresh={
+                        ()=>{
+                            this.setState({
+                                refreshing:true
+                            });
+                            this.get()
+                        }
+                    }
                 />
             </View>
         );

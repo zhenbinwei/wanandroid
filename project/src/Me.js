@@ -76,10 +76,12 @@ export default class Me extends Component<Props> {
                 <View style={{flex: 1,backgroundColor:Colors.zColor2}}>
                     <View style={{height:150, backgroundColor:Colors.zColor1,justifyContent:'center',
                         alignItems:'center'}}>
-                        <View
-                            style={{height:80,width:80,backgroundColor:Colors.zColor2}}
-                        />
-                        <Text style={{fontSize:16,marginTop:8}}>{this.state.userInfo.username}</Text>
+                            <Image
+                                style={{height:80,width:80}}
+                                source={require('../res/logo.png')}
+                                resizeMode={'contain'}
+                            />
+                        <Text style={{fontSize:20,marginTop:8,color:Colors.fontColor4}}>{this.state.userInfo.username}</Text>
                     </View>
                     <TouchableOpacity style={{height:44, backgroundColor:Colors.zColor2,justifyContent:'flex-start',
                         flexDirection:'row',
