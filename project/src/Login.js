@@ -104,7 +104,7 @@ export default class Login extends Component<Props> {
                 <TouchableOpacity style={styles.signUp}
                                   onPress={
                                       () => {
-                                          this.props.navigation.navigate('SignUp')
+                                          this.props.navigation.navigate('SignUp',{...this.props.navigation.state.params})
                                       }
                                   }>
                     <Text style={{fontSize:20,color:Colors.fontColor0}}>
