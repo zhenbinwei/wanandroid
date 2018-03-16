@@ -1,6 +1,6 @@
 import {Component} from "react";
 import React from "react";
-import {Button, Image, View} from "react-native";
+import {Button, Image, TextInput, View} from "react-native";
 import Colors from "./Colors";
 
 /**
@@ -9,9 +9,19 @@ import Colors from "./Colors";
  * @Author       : weizhenbin
  * @Time         : 2018/3/6 15:21
  */
-
+let  i=0;
 export default class Main extends Component<{}> {
+
+    constructor(props){
+        super(props)
+        this.state={
+            text:''
+        }
+    }
+
     render() {
+
+        console.log(this.state.text)
         return (
             <View
                 style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:Colors.zColor2}}
@@ -23,6 +33,19 @@ export default class Main extends Component<{}> {
                     resizeMode={'contain'}
                 />
                 </View>
+
+                <TextInput
+                    defaultValue={this.state.text}
+                ></TextInput>
+                <Button
+                    title='输入'
+                        onPress={()=>{
+
+                        this.setState({
+                            text:'aaaaa'+(i++)
+                        })
+                    }}
+                />
             </View>
         );
     }

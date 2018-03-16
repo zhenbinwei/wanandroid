@@ -22,11 +22,14 @@ export default class TitleBar extends Component<Props> {
             rightText: this.props.rightText,
             rightView: this.props.rightView,
             onLeftPress: this.props.onLeftPress,
-            onRightPress: this.props.onRightPress
+            onRightPress: this.props.onRightPress,
         }
     }
 
     render() {
+        if(this.state.centerView) {
+            console.log('TitleBar render' + this.state.centerView.props)
+        }
         return (
             <View style={{
                width:width, height: 44, justifyContent:'center'

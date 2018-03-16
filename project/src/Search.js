@@ -9,7 +9,11 @@ import TitleBar from "./views/TitleBar";
 
 let key='';
 let page=0;
-const itemDivide=()=>(<ItemDivideComponent/>)
+const itemDivide=()=>(<ItemDivideComponent/>);
+const hotkeyApi='http://www.wanandroid.com//hotkey/json';
+
+let hotKeyTable;
+
 export default class Search extends Component<Props> {
 
 
@@ -17,7 +21,9 @@ export default class Search extends Component<Props> {
          super(props);
          this.state = {
              data: [],
-             refreshing:false
+             refreshing:false,
+             showHotKey:true,
+             keyWords:''
          }
      }
      searchFun(keyWords) {
@@ -32,21 +38,43 @@ export default class Search extends Component<Props> {
             return response.json()
         }).then((responsJson) => {
             if(page===0){
-                console.log('数据1'+responsJson.data.datas.length)
                 this.setState({
                     data: responsJson.data.datas,
+                    showHotKey:false,
                     refreshing:false
                 });
             }else {
                 this.state.data.push(...responsJson.data.datas);
                 this.setState({
-                    refreshing:false
+                    refreshing:false,
+                    showHotKey:false,
                 });
             }
         }).catch((err) => {//2
 
         });
     }
+
+    getHotKey(){
+        fetch(hotkeyApi, {
+            method: 'GET',
+        }).then((response) => {
+            return response.json()
+        }).then((responsJson) => {
+            hotKeyTable=this.getChilds(responsJson.data);
+            this.setState({
+                showHotKey:true,
+            });
+        }).catch((err) => {//2
+            console.error(err);
+        });
+    }
+
+    componentDidMount() {
+        this.getHotKey()
+    }
+
+
     getApi(){
         return 'http://www.wanandroid.com/article/query/'+page+'/json'
     }
@@ -84,12 +112,39 @@ export default class Search extends Component<Props> {
         </TouchableOpacity>
 
     );
+
+    getChilds(childs){
+        let pages =[];
+        let color=['#ff3232','#ff6464','#ff9696','#FFC832'];
+        for (let i = 0; i < childs.length; i++) {
+            let n=Math.floor(Math.random()*4);
+            pages.push(
+                <TouchableOpacity key={i} activeOpacity={0.8} onPress={
+                    ()=>{
+                        this.setState({
+                            keyWords:childs[i].name
+                        })
+                    }
+                }>
+                    <Text style={[styles.labelItem, {backgroundColor:color[n]} ]} >{childs[i].name}</Text>
+                </TouchableOpacity>
+            );
+        }
+        return(
+            <View style={styles.label}>
+                {pages}
+            </View>
+        );
+    }
+
     render(){
+        console.log(this.state.keyWords)
         return( <View style={{flex: 1,backgroundColor:Colors.zColor2}}>
             <TitleBar
                 {...this.props}
-                 centerView={<TextInput
+                 centerView={(<TextInput
                  style={{ flex:1}}
+                 defaultValue={this.state.keyWords}
                  underlineColorAndroid={Colors.zColor1}
                  placeholder={'输入关键字 空格隔开...'}
                  returnKeyType={'search'}
@@ -107,7 +162,7 @@ export default class Search extends Component<Props> {
                          this.searchFun(key)
                      }
                      }
-             />}
+                 />)}
              rightView={<TouchableOpacity  onPress={()=>{
                  Keyboard.dismiss();
                  this.setState({
@@ -121,8 +176,7 @@ export default class Search extends Component<Props> {
                  />
              </TouchableOpacity>}
             />
-            <FlatList
-                /*getItemLayout={(data, index) => ( {length: 63, offset: 63 * index, index} )}*/
+            {this.state.showHotKey?hotKeyTable: <FlatList
                 data={this.state.data}
                 keyExtractor={
                     (item) => {
@@ -150,7 +204,8 @@ export default class Search extends Component<Props> {
                     }
                 }
                 onEndReachedThreshold={0.1}
-            />
+            />}
+
         </View>)
     }
 }
@@ -162,4 +217,18 @@ let styles = StyleSheet.create({
     item: {
         margin: 8
     },
+    label:{
+        justifyContent:'flex-start',
+        flexDirection:'row',
+        flexWrap:'wrap',
+        marginTop:4,
+        marginBottom:4
+    },
+    labelItem:{
+        fontSize:16,
+        margin:4,
+        color:Colors.fontColor4,
+        padding:4,
+        borderRadius:5
+    }
 });
