@@ -124,6 +124,8 @@ export default class Search extends Component<Props> {
                         this.setState({
                             keyWords:childs[i].name
                         })
+                        key=childs[i].name;
+                        console.log('key'+key)
                     }
                 }>
                     <Text style={[styles.labelItem, {backgroundColor:color[n]} ]} >{childs[i].name}</Text>
@@ -168,6 +170,7 @@ export default class Search extends Component<Props> {
                  this.setState({
                      refreshing:true
                  });
+                 page=0;
                  this.searchFun(key)
              }}>
                  <Image
