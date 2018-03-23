@@ -1,6 +1,6 @@
 import {Component} from "react";
 import React from "react";
-import {Button, Image, TextInput, View} from "react-native";
+import {Button, Image, ScrollView, Text, TextInput, View} from "react-native";
 import Colors from "./Colors";
 
 /**
@@ -33,19 +33,6 @@ export default class Main extends Component<{}> {
                     resizeMode={'contain'}
                 />
                 </View>
-
-                <TextInput
-                    defaultValue={this.state.text}
-                ></TextInput>
-                <Button
-                    title='输入'
-                        onPress={()=>{
-
-                        this.setState({
-                            text:'aaaaa'+(i++)
-                        })
-                    }}
-                />
             </View>
         );
     }

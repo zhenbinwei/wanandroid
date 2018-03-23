@@ -12,6 +12,8 @@ import SignUp from "./project/src/SignUp";
 import Search from "./project/src/Search";
 import TitleBar from "./project/src/views/TitleBar";
 import * as React from "react";
+import CategoryDetail from "./project/src/CategoryDetail";
+import CategoryDetailItem from "./project/src/CategoryDetailItem";
 
 
 const TabNav=TabNavigator({
@@ -80,7 +82,8 @@ const App=StackNavigator({
     SignUp:{screen:SignUp},
     Login:{screen:Login},
     Search:{screen:Search},
-    TitleBar:{screen:TitleBar}
+    TitleBar:{screen:TitleBar},
+    CategoryDetail:{screen:CategoryDetail},
 },{
     mode:'card',
     headerMode:'screen',

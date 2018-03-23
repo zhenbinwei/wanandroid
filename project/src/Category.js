@@ -16,7 +16,6 @@ import TitleBar from "./views/TitleBar";
 
 
 let dataApi='http://www.wanandroid.com/tree/json';
-
 export default class Category extends Component<Props> {
     constructor(props){
         super(props);
@@ -47,24 +46,29 @@ export default class Category extends Component<Props> {
 
     _renderItem = ({item}) => (
 
-        <View style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={()=>{
+            this.props.navigation.navigate('CategoryDetail',{item:item,index:0})
+        }}>
             <Text style={styles.itemTitle}>
                 {item.name}
             </Text>
-            {this.getChilds(item.children)}
-        </View>
+            {this.getChilds(item)}
+        </TouchableOpacity>
 
     );
 
-    getChilds(childs){
+    getChilds(item){
         let pages =[];
-        for (let i = 0; i < childs.length; i++) {
+        if(item&&item.children){
+        for (let i = 0; i < item.children.length; i++) {
             pages.push(
-                <TouchableOpacity key={i}>
-                <Text style={styles.labelItem} >{childs[i].name}</Text>
+                <TouchableOpacity key={i} onPress={()=>{
+                    this.props.navigation.navigate('CategoryDetail',{item:item,index:i})
+                }}>
+                <Text style={styles.labelItem} >{item.children[i].name}</Text>
                 </TouchableOpacity>
             );
-        }
+        }}
         return(
             <View style={styles.label}>
                 {pages}
