@@ -13,11 +13,8 @@ import Colors from "./Colors";
 
 export default class CategoryDetail extends Component<Props> {
 
-
-
     render(){
         let {params}=this.props.navigation.state;
-        console.log('render')
         if (params){
             return(<View style={{flex:1}}>
                 <TitleBar
