@@ -200,10 +200,8 @@ export default class Search extends Component<Props> {
                 refreshing={this.state.refreshing}
                 onEndReached={
                     (info)=>{
-                        if(info.distanceFromEnd>0){
-                            page++;
-                            this.searchFun(key)
-                        }
+                        page++;
+                        this.searchFun(key)
                     }
                 }
                 onEndReachedThreshold={0.1}

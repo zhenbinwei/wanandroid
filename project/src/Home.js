@@ -22,7 +22,7 @@ const itemDivide=()=>(<ItemDivideComponent/>)
 export default class Home extends Component<Props> {
 
     componentDidMount() {
-        this.get();
+      //  this.get();
     }
 
     get() {
@@ -47,13 +47,64 @@ export default class Home extends Component<Props> {
         });
     }
 
+
+    collect(id){
+        fetch(this.collectApi(id), {
+            method: 'POST',
+        }).then((response) => {
+            return response.json()
+        }).then((responsJson) => {
+            if(responsJson.errorCode===0){
+                //收藏成功
+                this.changeData(id,true)
+            }
+            this.setState({
+                data:this.state.data
+            });
+        }).catch((err) => {//2
+            //console.error(err);
+        });
+    }
+
+    unCollect(id){
+        fetch(this.unCollectApi(id), {
+            method: 'POST',
+        }).then((response) => {
+            return response.json()
+        }).then((responsJson) => {
+            if(responsJson.errorCode===0){
+                //取消收藏成功
+                this.changeData(id,false)
+            }
+            this.setState({
+                data:this.state.data
+            });
+        }).catch((err) => {//2
+            //console.error(err);
+        });
+    }
+
+    changeData(id,collect){
+        for (let item of this.state.data) {
+            if(item.id===id){
+                item.collect=collect
+            }
+        }
+    }
+
     getApi(){
         return 'http://www.wanandroid.com/article/list/'+page+'/json'
     }
 
+    collectApi(id){
+        return 'http://www.wanandroid.com/lg/collect/'+id+'/json'
+    }
+    unCollectApi(id){
+        return 'http://www.wanandroid.com/lg/uncollect_originId/'+id+'/json'
+    }
     constructor(props) {
         super(props);
-
+        page=0;
         this.state = {
             data: [],
             refreshing:true
@@ -70,6 +121,7 @@ export default class Home extends Component<Props> {
                 })
             }
         }>
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
             <Text
                 style={{fontSize: 16,marginTop:4,marginBottom:4}}
                   numberOfLines={1}
@@ -77,6 +129,19 @@ export default class Home extends Component<Props> {
                 {'分类:'} <Text style={{color: Colors.zColor1}}>{item.chapterName}</Text>
 
             </Text>
+                <TouchableOpacity onPress={()=>{
+                    if(!item.collect){
+                        this.collect(item.id)
+                    }else {
+                        this.unCollect(item.id)
+                    }
+                }}>
+                <Image
+                    style={{height:25,width:25}}
+                    source={item.collect?require('../res/collected.png'):require('../res/collect.png')}
+                />
+                </TouchableOpacity>
+            </View>
             <Text
                 style={styles.itemTitle}
                 numberOfLines={2}
@@ -142,10 +207,12 @@ export default class Home extends Component<Props> {
                     refreshing={this.state.refreshing}
                     onEndReached={
                         (info)=>{
-                            if(info.distanceFromEnd>0){
+                            this.get()
+                            /*if(info.distanceFromEnd>0){
                                 page++;
                                 this.get()
-                            }
+                            }*/
+                            page++;
                         }
                     }
                     onEndReachedThreshold={0.1}

@@ -17,6 +17,7 @@ export default class CategoryDetailItem extends Component<Props> {
 
     constructor(props){
         super(props);
+        page=0;
         this.state = {
             data: [],
             refreshing:true,
@@ -45,7 +46,7 @@ export default class CategoryDetailItem extends Component<Props> {
         });
     }
     componentDidMount() {
-        this.getData()
+       // this.getData()
     }
 
 
@@ -110,10 +111,8 @@ export default class CategoryDetailItem extends Component<Props> {
                 refreshing={this.state.refreshing}
                 onEndReached={
                     (info)=>{
-                        if(info.distanceFromEnd>0){
-                            page++;
-                            this.getData()
-                        }
+                        this.getData()
+                        page++;
                     }
                 }
                 onEndReachedThreshold={0.1}
