@@ -85,7 +85,10 @@ export default class Me extends Component<Props> {
                     </View>
                     <TouchableOpacity style={{height:44, backgroundColor:Colors.zColor2,justifyContent:'flex-start',
                         flexDirection:'row',
-                        flexWrap:'wrap', alignItems:'center',borderBottomWidth :1,borderColor:Colors.fColor1 }}>
+                        flexWrap:'wrap', alignItems:'center',borderBottomWidth :1,borderColor:Colors.fColor1 }}
+                                      onPress={()=>{
+                                          this.props.navigation.navigate('CollectList')
+                                      }}>
                         <Text style={{fontSize:16,marginLeft:8,color:Colors.fontColor2}}>
                             {'收藏'}
                         </Text>
@@ -118,7 +121,6 @@ export default class Me extends Component<Props> {
         storage.load({
             key: 'UserInfoKey',
         }).then(ret => {
-            console.log('数据'+ret)
             if(ret.username){
                 this.setState({
                     loginState:true,

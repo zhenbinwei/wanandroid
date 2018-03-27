@@ -14,6 +14,7 @@ import TitleBar from "./project/src/views/TitleBar";
 import * as React from "react";
 import CategoryDetail from "./project/src/CategoryDetail";
 import CategoryDetailItem from "./project/src/CategoryDetailItem";
+import CollectList from "./project/src/CollectList";
 
 
 const TabNav=TabNavigator({
@@ -84,6 +85,7 @@ const App=StackNavigator({
     Search:{screen:Search},
     TitleBar:{screen:TitleBar},
     CategoryDetail:{screen:CategoryDetail},
+    CollectList:{screen:CollectList},
 },{
     mode:'card',
     headerMode:'screen',
