@@ -5,6 +5,7 @@ import {FlatList, Image, Text, TextInput, TouchableOpacity, View,StyleSheet,Keyb
 import Colors from "./Colors";
 import ItemDivideComponent from "./views/ItemDivideComponent";
 import TitleBar from "./views/TitleBar";
+import EmptyComponent from "./views/EmptyComponent";
 
 
 let key='';
@@ -186,6 +187,7 @@ export default class Search extends Component<Props> {
                         return item.id
                     }
                 }
+                ListEmptyComponent={<EmptyComponent/>}
                 ItemSeparatorComponent={itemDivide}
                 renderItem={this._renderItem}
                 onRefresh={

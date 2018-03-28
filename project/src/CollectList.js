@@ -14,6 +14,7 @@ import {
 import Colors from "./Colors";
 import ItemDivideComponent from "./views/ItemDivideComponent";
 import TitleBar from "./views/TitleBar";
+import EmptyComponent from "./views/EmptyComponent";
 
 
 let page=0;
@@ -177,6 +178,7 @@ export default class CollectList extends Component<Props> {
                             return item.id
                         }
                     }
+                    ListEmptyComponent={<EmptyComponent/>}
                     ItemSeparatorComponent={itemDivide}
                     renderItem={this._renderItem}
                     onRefresh={

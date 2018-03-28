@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import Colors from "./Colors";
 import TitleBar from "./views/TitleBar";
+import EmptyComponent from "./views/EmptyComponent";
 
 
 let dataApi='http://www.wanandroid.com/tree/json';
@@ -107,6 +108,7 @@ export default class Category extends Component<Props> {
                     }
                     refreshing={this.state.refreshing}
                     ItemSeparatorComponent={ItemDivideComponent}
+                    ListEmptyComponent={<EmptyComponent/>}
                     renderItem={this._renderItem}
                     onRefresh={
                         ()=>{

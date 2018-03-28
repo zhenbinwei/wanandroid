@@ -8,6 +8,7 @@ import React, {Component} from 'react';
 import {FlatList, Image, Text, TextInput, TouchableOpacity, View,StyleSheet} from "react-native";
 import Colors from "./Colors";
 import ItemDivideComponent from "./views/ItemDivideComponent";
+import EmptyComponent from "./views/EmptyComponent";
 
 
 let page=0;
@@ -98,6 +99,7 @@ export default class CategoryDetailItem extends Component<Props> {
                     }
                 }
                 ItemSeparatorComponent={itemDivide}
+                ListEmptyComponent={<EmptyComponent/>}
                 renderItem={this._renderItem}
                 onRefresh={
                     ()=>{

@@ -15,6 +15,7 @@ import Colors from "./Colors";
 import ItemDivideComponent from "./views/ItemDivideComponent";
 import BannerComponent from "./views/BannerComponent";
 import TitleBar from "./views/TitleBar";
+import EmptyComponent from "./views/EmptyComponent";
 
 
 let page=0;
@@ -193,6 +194,7 @@ export default class Home extends Component<Props> {
                         }
                     }
                     ItemSeparatorComponent={itemDivide}
+                    ListEmptyComponent={<EmptyComponent/>}
                     renderItem={this._renderItem}
                     ListHeaderComponent={<BannerComponent {...this.props}/>}
                     onRefresh={
