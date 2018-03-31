@@ -15,6 +15,7 @@ import Colors from "./Colors";
 import ItemDivideComponent from "./views/ItemDivideComponent";
 import TitleBar from "./views/TitleBar";
 import EmptyComponent from "./views/EmptyComponent";
+import CollectListItem from "./views/CollectListItem";
 
 
 let page=0;
@@ -100,50 +101,10 @@ export default class CollectList extends Component<Props> {
     }
 
     _renderItem = ({item}) => (
-
-        <TouchableOpacity style={styles.item} onPress={
-            ()=>{
-                this.props.navigation.navigate('Detail',{
-                    ...this.props.navigation.state.params,
-                    url:item.link,title:item.title
-                })
-            }
-        }>
-            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                <Text
-                    style={{fontSize: 16,marginTop:4,marginBottom:4}}
-                    numberOfLines={1}
-                >
-                    {'分类:'} <Text style={{color: Colors.zColor1}}>{item.chapterName}</Text>
-
-                </Text>
-                <TouchableOpacity onPress={()=>{
-
-                        this.unCollect(item.id,item.originId)
-
-                }}>
-                    <Image
-                        style={{height:25,width:25}}
-                        source={require('../res/collected.png')}
-                    />
-                </TouchableOpacity>
-            </View>
-            <Text
-                style={styles.itemTitle}
-                numberOfLines={2}
-            >
-                {item.title}
-            </Text>
-            <View style={{justifyContent:'space-between', flexDirection: 'row', marginTop: 4}}>
-                <Text style={{fontSize: 14}}
-                      numberOfLines={1}>
-                    {'作者:'}<Text style={{color: Colors.zColor1}}>{item.author}</Text>
-                </Text>
-                <Text
-                    numberOfLines={1}>{item.niceDate}</Text>
-            </View>
-        </TouchableOpacity>
-
+        <CollectListItem
+            {...this.props}
+            item={item}
+            unCollect={(id,originId)=> this.unCollect(id,originId)}/>
     );
 
     render() {

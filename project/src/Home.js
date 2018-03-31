@@ -16,6 +16,7 @@ import ItemDivideComponent from "./views/ItemDivideComponent";
 import BannerComponent from "./views/BannerComponent";
 import TitleBar from "./views/TitleBar";
 import EmptyComponent from "./views/EmptyComponent";
+import HomeListItem from "./views/HomeListItem";
 
 
 let page=0;
@@ -113,52 +114,11 @@ export default class Home extends Component<Props> {
     }
 
     _renderItem = ({item}) => (
-
-        <TouchableOpacity style={styles.item} onPress={
-            ()=>{
-                this.props.navigation.navigate('Detail',{
-                    ...this.props.navigation.state.params,
-                    url:item.link,title:item.title
-                })
-            }
-        }>
-            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-            <Text
-                style={{fontSize: 16,marginTop:4,marginBottom:4}}
-                  numberOfLines={1}
-            >
-                {'分类:'} <Text style={{color: Colors.zColor1}}>{item.chapterName}</Text>
-
-            </Text>
-                <TouchableOpacity onPress={()=>{
-                    if(!item.collect){
-                        this.collect(item.id)
-                    }else {
-                        this.unCollect(item.id)
-                    }
-                }}>
-                <Image
-                    style={{height:25,width:25}}
-                    source={item.collect?require('../res/collected.png'):require('../res/collect.png')}
-                />
-                </TouchableOpacity>
-            </View>
-            <Text
-                style={styles.itemTitle}
-                numberOfLines={2}
-            >
-                {item.title}
-            </Text>
-            <View style={{justifyContent:'space-between', flexDirection: 'row', marginTop: 4}}>
-                <Text style={{fontSize: 14}}
-                      numberOfLines={1}>
-                    {'作者:'}<Text style={{color: Colors.zColor1}}>{item.author}</Text>
-                </Text>
-                <Text
-                      numberOfLines={1}>{item.niceDate}</Text>
-            </View>
-        </TouchableOpacity>
-
+       <HomeListItem
+                 {...this.props}
+                 item={item}
+                 collect={ (id)=> this.collect(id)}
+                 unCollect={(id)=> this.unCollect(id)}/>
     );
 
     render() {
@@ -227,12 +187,3 @@ export default class Home extends Component<Props> {
 }
 
 
-let styles = StyleSheet.create({
-    itemTitle: {
-        fontSize: 20,
-        color:Colors.fontColor1,
-    },
-    item: {
-        margin: 8
-    },
-});
